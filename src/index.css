@@ -161,3 +161,83 @@ code {
 .row-posters .movie-card {
   flex: 0 0 160px;
 }
+
+.movie-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.details {
+  position: relative;
+  min-height: 100vh;
+}
+
+.details-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+}
+
+.details-content {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.back-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.details-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.details-main img {
+  width: 300px;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.details-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.details-info h1 {
+  margin: 0 0 8px;
+}
+
+.details-info p {
+  line-height: 1.6;
+}
+
+.details-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15, 15, 20, 0.75), #0f0f14 85%);
+}
+
+.details-content {
+  color: #fff;
+}
+
+.details-info p {
+  color: #eee;
+}
+
+.details-info .meta {
+  color: #ccc;
+}
+
+.details-info h1,
+.details-info h3 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}

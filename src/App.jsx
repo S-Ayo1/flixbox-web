@@ -1,16 +1,12 @@
-import Banner from "./components/Banner";
-import MovieRow from "./components/MovieRow";
-import { getTrending, getTopRated, getUpcoming } from "./api/tmdb";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import MovieDetails from "./pages/MovieDetails";
 
 export default function App() {
   return (
-    <>
-      <Banner />
-      <main>
-        <MovieRow title="Trending This Week" fetchMovies={getTrending} />
-        <MovieRow title="Top Rated" fetchMovies={getTopRated} />
-        <MovieRow title="Upcoming" fetchMovies={getUpcoming} />
-      </main>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/movie/:id" element={<MovieDetails />} />
+    </Routes>
   );
 }

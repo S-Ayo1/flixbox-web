@@ -14,3 +14,11 @@ async function fetchFromTMDB(path) {
 export const getTrending = () => fetchFromTMDB("/trending/movie/week");
 export const getTopRated = () => fetchFromTMDB("/movie/top_rated");
 export const getUpcoming = () => fetchFromTMDB("/movie/upcoming");
+
+export async function getMovieDetails(id) {
+  const res = await fetch(
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=videos,credits`
+  );
+  if (!res.ok) throw new Error("Failed to fetch movie details");
+  return res.json();
+}
