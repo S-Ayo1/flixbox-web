@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getMovieDetails, IMAGE_URL, BACKDROP_URL } from "../api/tmdb";
+import TrailerModal from "../components/TrailerModal";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -20,6 +22,9 @@ export default function MovieDetails() {
   if (error) return <p className="status">Error: {error}</p>;
 
   const cast = movie.credits.cast.slice(0, 8);
+  const trailer =
+  movie.videos.results.find((v) => v.site === "YouTube" && v.type === "Trailer") ||
+  movie.videos.results.find((v) => v.site === "YouTube");
 
   return (
     <div className="details">
@@ -43,11 +48,22 @@ export default function MovieDetails() {
             </p>
             <p className="meta">{movie.genres.map((g) => g.name).join(" • ")}</p>
             <p>{movie.overview}</p>
+            {trailer && (
+                <button className="trailer-btn" onClick={() => setShowTrailer(true)}>
+                    ▶ Watch Trailer
+                </button>
+            )}
             <h3>Cast</h3>
             <p>{cast.map((c) => c.name).join(", ")}</p>
           </div>
         </div>
       </div>
+      {showTrailer && (
+  <TrailerModal
+    videoKey={trailer.key}
+    onClose={() => setShowTrailer(false)}
+  />
+)}
     </div>
   );
 }
